@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Задание 10 — Анимация CSS с steps()</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+
+    .sprite {
+      width: 70px;     /* ширина одного кадра */
+      height: 200px;    /* высота одного кадра */
+      margin: 0 auto;
+      background-image: url('https://static.vecteezy.com/ti/gratis-vektor/t2/10847649-sammlung-von-running-man-illustration-animation-sprite-set-sport-kostenlos-vektor.jpg'); /* пример спрайта */
+      background-repeat: no-repeat;
+      background-position: -100px;
+      /* ширина спрайта должна быть: ширина_кадра * количество_кадров */
+      animation: playSteps 1s steps(10) infinite;
+    }
+
+    /* Анимация с steps(10) — 10 кадров */
+    @keyframes playSteps {
+      from {
+        background-position: 50px 0;
+      }
+      to {
+        background-position: -750px 0; /* -100px * 10 кадров */
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Задание 10: Анимация CSS с steps()</h1>
+  <p>Анимация спрайта, воспроизводящая 10 кадров с помощью steps()</p>
+  
+  <div class="sprite"></div>
+
+  <p><small>Здесь используется внешний пример спрайта 10 кадров по горизонтали, каждый кадр 100x100 пикселей.</small></p>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Задание 2 — Самое длинное слово</title>
+</head>
+<body>
+  <h1>Задание 2: Найти самое длинное слово в тексте</h1>
+
+  <form id="longestWordForm">
+    <label for="textInput">Введите текст:</label><br>
+    <textarea id="textInput" rows="4" cols="50" required></textarea><br>
+    <button type="submit">Найти самое длинное слово</button>
+  </form>
+
+  <p id="resultText"></p>
+
+  <script>
+    document.getElementById("longestWordForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      let text = document.getElementById("textInput").value;
+      let words = text.split(" ");
+
+      let longestWord = "";
+
+      for (let index = 0; index < words.length; index++) {
+        let currentWord = words[index].trim();
+        if (currentWord.length > longestWord.length) {
+          longestWord = currentWord;
+        }
+      }
+
+      let resultParagraph = document.getElementById("resultText");
+
+      if (longestWord.length > 0) {
+        resultParagraph.textContent = "Самое длинное слово: " + longestWord;
+      } else {
+        resultParagraph.textContent = "Слова не найдены.";
+      }
+    });
+  </script>
+</body>
+</html>

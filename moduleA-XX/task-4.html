@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Задание 4 — Сдвиг строки</title>
+</head>
+<body>
+  <h1>Задание 4: Сколько сдвигов нужно, чтобы одна строка стала другой</h1>
+
+  <form id="rotateForm">
+    <label for="stringA">Введите первую строку:</label>
+    <input type="text" id="stringA" required><br><br>
+
+    <label for="stringB">Введите вторую строку:</label>
+    <input type="text" id="stringB" required><br><br>
+
+    <button type="submit">Проверить</button>
+  </form>
+
+  <p id="resultText"></p>
+
+  <script>
+    document.getElementById("rotateForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      let original = document.getElementById("stringA").value;
+      let target = document.getElementById("stringB").value;
+      let resultElement = document.getElementById("resultText");
+
+      if (original.length !== target.length) {
+        resultElement.textContent = "Строки должны быть одинаковой длины.";
+        return;
+      }
+
+      let combined = original + original;
+      let index = combined.indexOf(target);
+
+      if (index === -1) {
+        resultElement.textContent = "Вторая строка не является сдвигом первой.";
+      } else {
+        resultElement.textContent = "Нужно сдвигов: " + index;
+      }
+    });
+  </script>
+</body>
+</html>

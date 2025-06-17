@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Задание 1 — Палиндром</title>
+</head>
+<body>
+  <h1>Задание 1: Проверка на палиндром</h1>
+
+  <form id="palindromeForm">
+    <label for="wordInput">Введите слово:</label>
+    <input type="text" id="wordInput" required>
+    <button type="submit">Проверить</button>
+  </form>
+
+  <p id="resultText"></p>
+
+  <script>
+    document.getElementById("palindromeForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      let inputText = document.getElementById("wordInput").value;
+      let normalizedText = inputText.toLowerCase();
+      let reversedText = normalizedText.split("").reverse().join("");
+
+      let resultParagraph = document.getElementById("resultText");
+
+      if (normalizedText === reversedText) {
+        resultParagraph.textContent = "Слово \"" + inputText + "\" является палиндромом.";
+      } else {
+        resultParagraph.textContent = "Слово \"" + inputText + "\" не является палиндромом.";
+      }
+    });
+  </script>
+</body>
+</html>

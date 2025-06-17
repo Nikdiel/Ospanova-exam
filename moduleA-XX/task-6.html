@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Задание 6 — CSS счётчик с чекбоксами</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .checkbox-container {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    /* Скрываем стандартный чекбокс */
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    /* Стиль для кастомных боксов */
+    label {
+      display: inline-block;
+      cursor: pointer;
+      user-select: none;
+      width: 60px;
+      height: 60px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      line-height: 60px;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    /* При отмеченном чекбоксе меняем фон и рамку */
+    input[type="checkbox"]:checked + label {
+      background-color: gold;
+      border-color: goldenrod;
+      color: #000;
+      font-weight: bolder;
+    }
+
+    /* Сумма */
+    #sum {
+      font-size: 28px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Задание 6: CSS счётчик с чекбоксами и суммой</h1>
+
+  <div class="checkbox-container">
+    <input type="checkbox" id="box1" data-value="10" />
+    <label for="box1">10</label>
+
+    <input type="checkbox" id="box2" data-value="32" />
+    <label for="box2">32</label>
+
+    <input type="checkbox" id="box3" data-value="64" />
+    <label for="box3">64</label>
+
+    <input type="checkbox" id="box4" data-value="-15" />
+    <label for="box4">-15</label>
+  </div>
+
+  <div>Сумма выбранных чисел: <span id="sum">0</span></div>
+
+  <script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const sumElement = document.getElementById('sum');
+
+    function updateSum() {
+      let total = 0;
+      checkboxes.forEach(box => {
+        if (box.checked) {
+          total += Number(box.dataset.value);
+        }
+      });
+      sumElement.textContent = total;
+    }
+
+    // Навешиваем обработчики клика на каждый чекбокс
+    checkboxes.forEach(box => {
+      box.addEventListener('change', updateSum);
+    });
+
+    // Инициализируем сумму при загрузке страницы
+    updateSum();
+  </script>
+</body>
+</html>
