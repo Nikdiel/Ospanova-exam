@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Обратный отсчёт до Олимпийских игр</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+      background: #f0f0f0;
+    }
+    #countdown {
+      font-size: 2em;
+      background: #222;
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      min-width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Обратный отсчёт до Олимпийских игр</h1>
+
+  <div id="countdown">Загрузка...</div>
+
+  <script>
+    // Укажи дату Олимпийских игр
+    // Например: 26 июля 2024 года, 20:00 (UTC+0)
+    const olympicsDate = new Date("2024-07-26T20:00:00Z");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = olympicsDate - now; // разница в миллисекундах
+
+      if (diff <= 0) {
+        document.getElementById("countdown").textContent = "Олимпийские игры начались!";
+        clearInterval(timer);
+        return;
+      }
+
+      // Вычисляем дни, часы, минуты, секунды
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      // Выводим на страницу
+      document.getElementById("countdown").textContent = 
+        `${days} дн. ${hours.toString().padStart(2, '0')} ч ` +
+        `${minutes.toString().padStart(2, '0')} мин ` +
+        `${seconds.toString().padStart(2, '0')} сек`;
+    }
+
+    // Обновляем каждую секунду
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>

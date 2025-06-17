@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 5 — Fastest Runners</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Task 5: Fastest Runners (Simple Version)</h1>
+  <button onclick="showResults()">Show Result</button>
+  <pre id="output"></pre>
+
+  <script>
+    // Sample data
+    var runners = [
+      {
+        name: "Alice",
+        paces: ["5:50", "6:00", "6:06", "6:07", "6:08", "6:19", "6:28"]
+      },
+      {
+        name: "Bob",
+        paces: ["6:10", "6:20", "6:15", "6:30", "6:25", "6:40", "6:50"]
+      },
+      {
+        name: "Charlie",
+        paces: ["5:45", "5:55", "6:00", "5:58", "6:01", "6:00", "5:50"]
+      },
+      {
+        name: "Diana",
+        paces: ["6:30", "6:40", "6:35", "6:50", "7:00", "6:55", "7:10"]
+      }
+    ];
+
+    // Convert "mm:ss" to total seconds
+    function timeToSeconds(time) {
+      var parts = time.split(":");
+      var minutes = parseInt(parts[0]);
+      var seconds = parseInt(parts[1]);
+      return minutes * 60 + seconds;
+    }
+
+    // Convert seconds to "mm:ss"
+    function secondsToTime(seconds) {
+      var m = Math.floor(seconds / 60);
+      var s = seconds % 60;
+      if (s < 10) s = "0" + s;
+      return m + ":" + s;
+    }
+
+    function showResults() {
+      var runnersWithTimes = [];
+
+      for (var i = 0; i < runners.length; i++) {
+        var runner = runners[i];
+        var timesInSec = [];
+
+        // Convert all paces to seconds
+        for (var j = 0; j < runner.paces.length; j++) {
+          timesInSec.push(timeToSeconds(runner.paces[j]));
+        }
+
+        // Calculate total time
+        var totalTime = 0;
+        for (var j = 0; j < timesInSec.length; j++) {
+          totalTime += timesInSec[j];
+        }
+
+        // Calculate average and fastest pace
+        var average = totalTime / timesInSec.length;
+        var fastest = Math.min.apply(null, timesInSec);
+
+        runnersWithTimes.push({
+          name: runner.name,
+          totalTime: totalTime,
+          averagePace: average,
+          fastestPace: fastest
+        });
+      }
+
+      // Calculate average total time of all runners
+      var totalAll = 0;
+      for (var i = 0; i < runnersWithTimes.length; i++) {
+        totalAll += runnersWithTimes[i].totalTime;
+      }
+      var averageAll = totalAll / runnersWithTimes.length;
+
+      // Filter runners who are faster than average
+      var filtered = [];
+      for (var i = 0; i < runnersWithTimes.length; i++) {
+        if (runnersWithTimes[i].totalTime < averageAll) {
+          filtered.push(runnersWithTimes[i]);
+        }
+      }
+
+      // Sort by total time (fastest first)
+      filtered.sort(function(a, b) {
+        return a.totalTime - b.totalTime;
+      });
+
+      // Format output
+      var result = [];
+      for (var i = 0; i < filtered.length; i++) {
+        var r = filtered[i];
+        result.push({
+          name: r.name,
+          averagePace: secondsToTime(Math.round(r.averagePace)),
+          fastestPace: secondsToTime(r.fastestPace)
+        });
+      }
+
+      document.getElementById("output").textContent = JSON.stringify(result, null, 2);
+    }
+  </script>
+</body>
+</html>

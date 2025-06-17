@@ -2,110 +2,92 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Задание 5 — Быстрые бегуны</title>
+  <title>Task 5 — Fastest Runners</title>
   <style>
-    table {
-      border-collapse: collapse;
-      margin-top: 15px;
-      width: 100%;
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
     }
-    th, td {
-      border: 1px solid #999;
-      padding: 8px;
-      text-align: center;
-    }
-    th {
-      background-color: #4CAF50;
-      color: white;
+
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
-  <h1>Задание 5: Быстрые бегуны</h1>
+  <h1>Task 5: Быстрые бегуны</h1>
 
-  <p>Вставьте JSON-массив бегунов, например:</p>
-  <pre>[
-  {
-    "name": "Alice",
-    "paces": ["5:50", "6:00", "6:06", "6:07", "6:08", "6:19", "6:28"]
-  },
-  {
-    "name": "Bob",
-    "paces": ["6:30", "6:35", "6:25", "6:40", "6:45", "6:50", "6:55"]
-  }
-]</pre>
+  <button onclick="processRunners()">Показать результат</button>
 
-  <form id="form">
-    <textarea id="input" rows="8" style="width:100%" required></textarea><br>
-    <button type="submit">Показать быстрых бегунов</button>
-  </form>
-
-  <div id="output"></div>
+  <pre id="output"></pre>
 
   <script>
-    // Перевод темпа из "мм:сс" в секунды
-    function paceToSeconds(pace) {
-      const [min, sec] = pace.split(":").map(Number);
+    const runners = [
+      {
+        name: "Alice",
+        paces: ["5:50", "6:00", "6:06", "6:07", "6:08", "6:19", "6:28"]
+      },
+      {
+        name: "Bob",
+        paces: ["6:10", "6:20", "6:15", "6:30", "6:25", "6:40", "6:50"]
+      },
+      {
+        name: "Charlie",
+        paces: ["5:45", "5:55", "6:00", "5:58", "6:01", "6:00", "5:50"]
+      },
+      {
+        name: "Diana",
+        paces: ["6:30", "6:40", "6:35", "6:50", "7:00", "6:55", "7:10"]
+      }
+    ];
+
+    // Преобразует строку "мм:сс" в секунды
+    function timeToSeconds(t) {
+      const [min, sec] = t.split(":").map(Number);
       return min * 60 + sec;
     }
 
-    // Перевод секунд в формат "мм:сс"
-    function secondsToPace(seconds) {
-      const min = Math.floor(seconds / 60);
-      const sec = seconds % 60;
-      return min + ":" + (sec < 10 ? "0" : "") + sec;
+    // Преобразует секунды в строку "мм:сс"
+    function secondsToTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${m}:${s.toString().padStart(2, '0')}`;
     }
 
-    document.getElementById("form").addEventListener("submit", e => {
-      e.preventDefault();
-
-      const output = document.getElementById("output");
-      output.innerHTML = "";
-
-      let runners;
-      try {
-        runners = JSON.parse(document.getElementById("input").value);
-      } catch {
-        output.textContent = "Ошибка: неверный формат JSON.";
-        return;
-      }
-
-      if (!Array.isArray(runners) || runners.length === 0) {
-        output.textContent = "Введите массив бегунов.";
-        return;
-      }
-
-      // Рассчитать общее время каждого бегуна
-      runners.forEach(r => {
-        r.totalTime = r.paces.reduce((sum, p) => sum + paceToSeconds(p), 0);
+    function processRunners() {
+      // Подсчёт времени каждого бегуна
+      const runnersWithTimes = runners.map(runner => {
+        const timesInSec = runner.paces.map(timeToSeconds);
+        const total = timesInSec.reduce((a, b) => a + b, 0);
+        const avg = total / runner.paces.length;
+        const min = Math.min(...timesInSec);
+        return {
+          name: runner.name,
+          totalTime: total,
+          averagePaceSec: avg,
+          fastestPaceSec: min
+        };
       });
 
-      // Среднее время среди всех бегунов
-      const averageTime = runners.reduce((sum, r) => sum + r.totalTime, 0) / runners.length;
+      // Среднее общее время всех бегунов
+      const totalAll = runnersWithTimes.reduce((sum, r) => sum + r.totalTime, 0);
+      const avgAll = totalAll / runners.length;
 
-      // Выбрать бегунов быстрее среднего
-      const fastRunners = runners.filter(r => r.totalTime < averageTime);
+      // Отбираем тех, кто быстрее среднего
+      const filtered = runnersWithTimes
+        .filter(r => r.totalTime < avgAll)
+        .sort((a, b) => a.totalTime - b.totalTime)
+        .map(r => ({
+          name: r.name,
+          averagePace: secondsToTime(Math.round(r.averagePaceSec)),
+          fastestPace: secondsToTime(r.fastestPaceSec)
+        }));
 
-      if (fastRunners.length === 0) {
-        output.textContent = "Нет бегунов быстрее среднего времени.";
-        return;
-      }
-
-      // Отсортировать бегунов по времени
-      fastRunners.sort((a, b) => a.totalTime - b.totalTime);
-
-      // Построить таблицу результатов
-      let html = "<table><thead><tr><th>Имя</th><th>Средний темп</th><th>Самый быстрый темп</th></tr></thead><tbody>";
-
-      fastRunners.forEach(r => {
-        const avgPace = Math.round(r.totalTime / r.paces.length);
-        const fastestPace = Math.min(...r.paces.map(paceToSeconds));
-        html += `<tr><td>${r.name}</td><td>${secondsToPace(avgPace)}</td><td>${secondsToPace(fastestPace)}</td></tr>`;
-      });
-
-      html += "</tbody></table>";
-      output.innerHTML = html;
-    });
+      // Вывод
+      document.getElementById("output").textContent = JSON.stringify(filtered, null, 2);
+    }
   </script>
 </body>
 </html>

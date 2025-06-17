@@ -35,11 +35,7 @@
       let combined = original + original;
       let index = combined.indexOf(target);
 
-      if (index === -1) {
-        resultElement.textContent = "Вторая строка не является сдвигом первой.";
-      } else {
-        resultElement.textContent = "Нужно сдвигов: " + index;
-      }
+      resultElement.textContent = "Нужно сдвигов: " + index;
     });
   </script>
 </body>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label{
+            background-color: aliceblue;
+            display: inline-block;
+            user-select: none;
+        }
+
+        input[type="checkbox"]{
+            display: none;
+        }
+
+        input[type="checkbox"]:checked + label{
+            background-color: gold;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox", data-value="15", id="box1">
+    <label for="box1">15</label>
+</body>
+</html>
