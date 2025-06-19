@@ -1,0 +1,11 @@
+.time {
+    font-size: 90px; font-family: 'paris2024';
+}
+
+@media (max-width: 500px) {
+.time {
+    font-size: 60px;
+
+}
+
+}

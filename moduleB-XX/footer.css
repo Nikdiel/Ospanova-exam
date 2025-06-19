@@ -1,0 +1,35 @@
+footer {
+    margin-top: 150px;
+    width: 100%;
+    height: 700px;
+    background-color: var(--clr-5);
+    display: flex;
+    padding: 100px 100px;
+    flex-wrap: wrap;
+}
+.links1 {
+    display: block;
+    width: 50%;
+}
+.links2 {
+    display: block;
+}
+
+.logo2 {
+    width: 100%;
+}
+@media (max-width: 500px) {
+    .copyright  {
+        margin-top: 0px;
+    }
+    .logo2 {
+        height: 20px;
+    }
+    footer {
+        height: 750px;
+ 
+    }
+    .links1 {
+        width: 100%;
+    } 
+}

@@ -1,0 +1,79 @@
+:root {
+    --clr-primaty: #002395;
+    --clr-2: #ED2939;
+    --clr-3: #D5E2F0;
+    --clr-4: #333333;
+    --clr-5: #474747;
+    --clr-6: #888888;
+}
+
+@font-face {
+    font-family: 'paris2024';
+    src: url(05-fonts/Paris2024/Paris2024-Variable.ttf);
+}
+
+@font-face {
+    font-family: 'popins-reg';
+    src: url(05-fonts/Poppins/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'popins-Thin';
+    src: url(05-fonts/Poppins/Poppins-Thin.ttf);
+}
+@font-face {
+    font-family: 'popins-l';
+    src: url(05-fonts/Poppins/Poppins-Light.ttf);
+}
+
+
+h1 {
+    font-family: 'paris2024';
+    font-size: 65px;
+}
+h2 {
+    font-family: 'popins-Thin';
+}
+h3 {
+    font-family: 'popins-Thin';
+}
+p {
+    font-family: 'popins-l';
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-family: 'popins-reg';
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.p-5 {
+    padding: 50px;
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+
+
+@media (max-width: 800px) {
+h1 {
+    font-size: 40px;
+}
+h2 {
+    font-size: 34px;
+}
+}
+

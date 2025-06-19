@@ -1,0 +1,35 @@
+.road {
+    padding: 50px;
+    background-color: var(--clr-3);
+}
+.card {
+    width: 320px;
+}
+
+.card-info {
+    padding: 5px;
+    background-color: white;
+}
+
+.cards {
+    margin-top: 25px;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 1300px) {
+    .card-4 {
+        display: none;
+    }
+}
+@media (max-width: 990px) {
+    .card-3 {
+        display: none;
+    }
+}
+@media (max-width: 650px) {
+    .card-2 {
+        display: none;
+    }
+
+}
