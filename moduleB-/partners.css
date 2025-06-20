@@ -1,0 +1,60 @@
+.partn {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center;
+    padding-left: 300px;
+    padding-right: 300px;
+    margin-top: 45px;
+}
+
+.partn img:hover {
+    scale: 1.1;
+}
+
+.Partners {
+    justify-content: center;
+display: flex;
+}
+
+.clickme-logo {
+display: none;
+} 
+
+@media (max-width: 800px) {
+    .partn {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .clickme-logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        justify-content: center;
+        cursor: pointer;
+    } 
+
+    .partn {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .partn {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+    .clickme-logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        justify-content: center;
+        cursor: pointer;
+    } 
+    .l15 .l14 {
+        visibility: hidden !important;
+        display: none !important;
+    }
+}

@@ -1,0 +1,108 @@
+.bck {
+    width: 100vw;
+    height: 890px;
+    background-image: url(03-images/hero-lg.png);
+    background-size: cover;
+    background-position: center;
+}
+.mask {
+    width: 100%;
+    display: block;
+    margin-top: 100px;
+}
+
+@media (max-width: 500px) {
+    .mask img {
+        width: 100%;
+    }
+}
+
+.info {
+    color: white;
+
+}
+
+.liner-1{
+    padding-right: 200px;
+}
+.liner-2{
+    padding-left: 250px;
+}
+.btn {
+    opacity: 0.9;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+ width: 170px;
+ height: 40px;
+ border-radius: 5px;
+ background-color: var(--clr-4);   
+ display: flex;
+ gap: 15px;
+
+}
+.bin {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: white;
+    opacity: 0.6;
+}
+
+.bin-active {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: white;
+}
+
+
+.clickme {
+    align-items: center;
+    gap: 15px;
+    justify-content: end;
+    cursor: pointer;
+
+}
+
+
+
+@media (max-width: 500px) {
+    .btn  {
+        display: none;
+    }
+}
+
+/* === Mobile Burger Menu === */
+.nav-link {
+    display: flex;
+    gap: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-link {
+        display: none;
+        flex-direction: column;
+        background-color: #fff;
+        padding: 15px;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .nav-link.active {
+        display: flex;
+    }
+
+    .burger {
+        display: block;
+        cursor: pointer;
+    }
+}
+
+.burger {
+    display: none; /* hidden by default */
+}
